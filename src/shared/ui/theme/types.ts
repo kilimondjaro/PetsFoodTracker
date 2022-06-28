@@ -1,3 +1,3 @@
-import type theme from './index';
+import type { lightTheme } from './index';
 
-export type Theme = typeof theme;
+export type Theme = typeof lightTheme;

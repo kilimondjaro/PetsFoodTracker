@@ -10,7 +10,7 @@ const palette = {
   transparentWhite: 'hsla(0, 0%, 100%, 0.7)',
 };
 
-const theme = createTheme({
+export const lightTheme = createTheme({
   colors: {
     mainBackground: palette.pinkyWhite,
     transparentBackground: palette.transparentWhite,
@@ -28,9 +28,34 @@ const theme = createTheme({
     l: 24,
     xl: 40,
   },
+  textVariants: {
+    title1: {
+      fontFamily: 'DaysOne',
+      fontSize: 40,
+      lineHeight: 50,
+    },
+    title2: {
+      fontFamily: 'DaysOne',
+      fontSize: 22,
+      lineHeight: 28,
+    },
+    text: {
+      fontFamily: 'DaysOne',
+      fontSize: 16,
+      lineHeight: 20,
+    },
+    number1: {
+      fontFamily: 'DaysOne',
+      fontSize: 65,
+      lineHeight: 82,
+    },
+    number2: {
+      fontFamily: 'DaysOne',
+      fontSize: 36,
+      lineHeight: 45,
+    },
+  },
   breakpoints: {
     phone: 0,
   },
 });
-
-export default theme;

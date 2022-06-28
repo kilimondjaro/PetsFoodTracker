@@ -1,11 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Box } from 'src/shared/ui/box';
+import { Text } from 'src/shared/ui/text';
 
 export function FoodTrackerScreen() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text textAlign="center" variant="text">
+        Open up App.tsx to start working on your app!
+      </Text>
       <StatusBar style="auto" />
+      <Box backgroundColor="textPrimary" width={300} height={300} />
     </View>
   );
 }
