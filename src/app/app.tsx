@@ -1,3 +1,5 @@
+import 'src/shared/config/i18n';
+
 import { ThemeProvider } from '@shopify/restyle';
 import { useFonts } from 'expo-font';
 import { lightTheme } from 'src/shared/ui/theme';
