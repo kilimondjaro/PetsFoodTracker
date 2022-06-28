@@ -2,7 +2,7 @@ import { createTheme } from '@shopify/restyle';
 
 const palette = {
   salmonGradient1: 'hsla(12, 84%, 71%, 1)',
-  salmonGradient2: 'hsla(12, 84%, 71%, 1)',
+  salmonGradient2: 'hsla(331, 78%, 70%, 1)',
   salmon: 'hsla(360, 97%, 73%, 1)',
   blue: 'hsla(231, 32%, 30%, 1)',
   grey: 'hsla(231, 9%, 56%, 1)',
