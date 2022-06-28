@@ -1,4 +1,5 @@
 import 'src/shared/config/i18n';
+import 'src/shared/config/firebase';
 
 import { ThemeProvider } from '@shopify/restyle';
 import { useFonts } from 'expo-font';
