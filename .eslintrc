@@ -44,7 +44,6 @@
         "extensions": [".tsx"]
       }
     ],
-    "react/function-component-definition": "error",
     "react/jsx-sort-props": [
       "error",
       {
