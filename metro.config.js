@@ -16,6 +16,9 @@ defaultConfig.transformer.getTransformOptions = async () => ({
   },
 });
 
-defaultConfig.watchFolders = [...defaultConfig.watchFolders, './storybook'];
+defaultConfig.watchFolders = [
+  ...defaultConfig.watchFolders,
+  './src/shared/storybook',
+];
 
 module.exports = defaultConfig;
