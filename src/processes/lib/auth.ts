@@ -4,12 +4,12 @@ import React from 'react';
 import { auth } from 'src/shared/config/firebase';
 
 export const useCurrentUser = () => {
-  const [user, setUser] = React.useState<User | null>(null);
-  const isAuthInitializing = React.useRef(true);
+  const [user, setUser] = React.useState<User | null>(auth.currentUser);
+  const [isAuthInitializing, setInitStatus] = React.useState(true);
 
   React.useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      isAuthInitializing.current = false;
+      setInitStatus(false);
       if (user) {
         setUser(user);
       } else {
@@ -18,7 +18,7 @@ export const useCurrentUser = () => {
     });
   }, []);
 
-  if (isAuthInitializing.current) {
+  if (isAuthInitializing) {
     return { data: undefined, isLoading: true };
   }
 
