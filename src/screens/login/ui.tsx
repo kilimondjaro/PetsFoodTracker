@@ -1,10 +1,10 @@
 import { SignInButton } from '../../features/auth-button';
 import { Box } from '../../shared/ui/box';
 
-export const LoginScreen = () => {
+export const SignInScreen = () => {
   return (
     <Box
-      backgroundColor="textSecondary"
+      backgroundColor="mainBackground"
       alignItems="center"
       justifyContent="center"
       flex={1}

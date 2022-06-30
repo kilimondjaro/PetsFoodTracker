@@ -2,8 +2,8 @@ import * as Google from 'expo-auth-session/providers/google';
 import Constants from 'expo-constants';
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Button } from 'react-native';
 import { t } from 'src/shared/lib/translate';
+import { Button } from 'src/shared/ui/button';
 
 import { auth } from '../../shared/config/firebase';
 import { signInToFirebase } from './lib/firebaseSignIn';
@@ -30,7 +30,7 @@ export const SignInButton = () => {
 
   return (
     <Button
-      disabled={!request}
+      // disabled={!request}
       title={t('authButton.signIn')}
       onPress={() => {
         void openAuthWebForm();
