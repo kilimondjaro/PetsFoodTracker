@@ -32,6 +32,7 @@ const getStories = () => {
   return [
     require('src/shared/ui/button/button.stories.tsx'),
     require('src/shared/ui/text-input/text-input.stories.tsx'),
+    require('src/shared/ui/settings-row/settings-row.stories.tsx'),
   ];
 };
 
