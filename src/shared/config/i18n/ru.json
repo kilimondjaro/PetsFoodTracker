@@ -5,5 +5,10 @@
   "authButton": {
     "login": "Войти",
     "logout": "Выйти"
+  },
+  "petProfileScreen": {
+    "name": "Кличка",
+    "dailyAmount": "Дневная норма",
+    "timesPerDay": "Количество раз в день"
   }
 }

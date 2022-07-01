@@ -5,5 +5,10 @@
   "authButton": {
     "signIn": "Sign in",
     "signOut": "Sign out"
+  },
+  "petProfileScreen": {
+    "name": "Name",
+    "dailyAmount": "Daily Amount",
+    "timesPerDay": "Times per day"
   }
 }
