@@ -16,7 +16,7 @@ export const Button = ({ onPress, title }: ButtonProps) => {
       <Box
         height={50}
         width={140}
-        borderRadius="button"
+        borderRadius="s"
         backgroundColor="buttonBackground"
         shadowOpacity={0.1}
         shadowRadius={8}

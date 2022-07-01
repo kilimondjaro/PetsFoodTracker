@@ -7,6 +7,7 @@ const palette = {
   lightSalmon: 'hsla(0, 62%, 97%, 1)',
   blue: 'hsla(231, 32%, 30%, 1)',
   grey: 'hsla(231, 9%, 56%, 1)',
+  lightGrey: 'hsla(0, 0%, 97%, 1)',
   pinkyWhite: 'hsla(12, 83%, 98%, 0.37)',
   transparentWhite: 'hsla(0, 0%, 100%, 0.7)',
 };
@@ -22,9 +23,11 @@ export const lightTheme = createTheme({
 
     textPrimary: palette.blue,
     textSecondary: palette.grey,
+
+    textInputBackground: palette.lightGrey,
   },
   borderRadii: {
-    button: 6,
+    s: 6,
   },
   spacing: {
     xs: 8,
