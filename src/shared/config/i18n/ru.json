@@ -10,7 +10,8 @@
     "title": "Профиль питомца",
     "name": "Кличка",
     "dailyAmount": "Дневная норма",
-    "timesPerDay": "Количество раз в день"
+    "timesPerDay": "Количество раз в день",
+    "save": "Сохранить"
   },
   "settingsInputModal": {
     "save": "Сохранить"

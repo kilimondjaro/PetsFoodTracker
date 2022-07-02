@@ -9,7 +9,7 @@ import { Text } from 'src/shared/ui/text';
 
 export const FoodTrackerScreen = ({
   navigation,
-}: NativeStackScreenProps<NavigationRoute, 'PetProfile'>) => {
+}: NativeStackScreenProps<NavigationRoute>) => {
   return (
     <Box
       flex={1}

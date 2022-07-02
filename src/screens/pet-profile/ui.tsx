@@ -1,6 +1,10 @@
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
+import type { NavigationRoute } from 'src/app/navigation';
+import { useSetPetData } from 'src/entities/pets/model';
 import { t } from 'src/shared/lib/translate';
 import { Box } from 'src/shared/ui/box';
+import { Button } from 'src/shared/ui/button';
 import { ModalLayout } from 'src/shared/ui/modal-layout';
 import { ModalWrapper } from 'src/shared/ui/modal-wrapper';
 import type {
@@ -11,10 +15,35 @@ import { SettingsInputModal } from 'src/shared/ui/settings-input-modal';
 import { SettingsRow } from 'src/shared/ui/settings-row/ui';
 import { Text } from 'src/shared/ui/text';
 
-export const PetProfileScreen = () => {
+export const PetProfileScreen = ({
+  navigation,
+}: NativeStackScreenProps<NavigationRoute>) => {
   const [petName, setPetName] = React.useState<string | null>(null);
-  const [dailyAmount, setDailyAmount] = React.useState<number | null>(null);
-  const [timesPerDay, setTimesPerDay] = React.useState<number | null>(null);
+  const [dailyFoodAmount, setDailyFoodAmount] = React.useState<number | null>(
+    null
+  );
+  const [foodPortionsPerDay, setFoodPortionsPerDay] = React.useState<
+    number | null
+  >(null);
+
+  const setPetData = useSetPetData();
+
+  const savePetProfile = () => {
+    if (!petName || !dailyFoodAmount || !foodPortionsPerDay) {
+      return;
+    }
+
+    setPetData.mutate(
+      {
+        payload: { name: petName, dailyFoodAmount, foodPortionsPerDay },
+      },
+      {
+        onSuccess: () => {
+          navigation.navigate('FoodTracker');
+        },
+      }
+    );
+  };
 
   return (
     <ModalLayout>
@@ -29,16 +58,19 @@ export const PetProfileScreen = () => {
         />
         <PetProfileSettingsRow
           title={t('petProfileScreen.dailyAmount')}
-          value={dailyAmount}
+          value={dailyFoodAmount}
           keyboardType="number-pad"
-          onSave={setDailyAmount}
+          onSave={setDailyFoodAmount}
         />
         <PetProfileSettingsRow
           title={t('petProfileScreen.timesPerDay')}
-          value={timesPerDay}
+          value={foodPortionsPerDay}
           keyboardType="number-pad"
-          onSave={setTimesPerDay}
+          onSave={setFoodPortionsPerDay}
         />
+        <Box>
+          <Button title={t('petProfileScreen.save')} onPress={savePetProfile} />
+        </Box>
       </Box>
     </ModalLayout>
   );

@@ -10,7 +10,8 @@
     "title": "Pet Profile",
     "name": "Name",
     "dailyAmount": "Daily Amount",
-    "timesPerDay": "Times per day"
+    "timesPerDay": "Times per day",
+    "save": "Save"
   },
   "settingsInputModal": {
     "save": "Save"
