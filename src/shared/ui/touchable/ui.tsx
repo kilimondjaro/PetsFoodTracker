@@ -7,9 +7,11 @@ import type { TouchableProps } from './types';
 export const Touchable = ({
   children,
   feedback = ImpactFeedbackStyle.Medium,
+  isDisabled,
   onPress,
 }: TouchableProps) => (
   <TouchableOpacity
+    disabled={isDisabled}
     onPress={() => {
       void Haptics.impactAsync(feedback);
       onPress();

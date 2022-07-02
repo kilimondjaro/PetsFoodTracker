@@ -7,8 +7,12 @@
     "logout": "Выйти"
   },
   "petProfileScreen": {
+    "title": "Профиль питомца",
     "name": "Кличка",
     "dailyAmount": "Дневная норма",
     "timesPerDay": "Количество раз в день"
+  },
+  "settingsInputModal": {
+    "save": "Сохранить"
   }
 }

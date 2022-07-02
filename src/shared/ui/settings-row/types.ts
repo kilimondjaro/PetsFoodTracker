@@ -1,5 +1,5 @@
-export type SettingRowProps = {
+export type SettingRowProps<T> = {
   name: string;
-  value: string | null;
+  value: T;
   onPress: () => void;
 };

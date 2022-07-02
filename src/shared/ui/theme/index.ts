@@ -31,6 +31,7 @@ export const lightTheme = createTheme({
   borderRadii: {
     xs: 2,
     s: 6,
+    l: 30,
   },
   spacing: {
     xs: 8,

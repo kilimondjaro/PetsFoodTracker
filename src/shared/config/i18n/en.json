@@ -7,8 +7,12 @@
     "signOut": "Sign out"
   },
   "petProfileScreen": {
+    "title": "Pet Profile",
     "name": "Name",
     "dailyAmount": "Daily Amount",
     "timesPerDay": "Times per day"
+  },
+  "settingsInputModal": {
+    "save": "Save"
   }
 }

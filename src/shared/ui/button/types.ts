@@ -1,4 +1,5 @@
 export type ButtonProps = {
-  onPress: () => void;
   title: string;
+  isDisabled?: boolean;
+  onPress: () => void;
 };

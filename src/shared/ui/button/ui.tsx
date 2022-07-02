@@ -4,14 +4,15 @@ import { Touchable } from 'src/shared/ui/touchable';
 
 import type { ButtonProps } from './types';
 
-export const Button = ({ onPress, title }: ButtonProps) => {
+export const Button = ({ title, isDisabled, onPress }: ButtonProps) => {
   return (
-    <Touchable onPress={onPress}>
+    <Touchable isDisabled={isDisabled} onPress={onPress}>
       <Box
         height={50}
         borderRadius="s"
         paddingHorizontal="m"
         justifyContent="center"
+        alignItems="center"
         backgroundColor="buttonBackground"
         shadowOpacity={0.1}
         shadowRadius={8}
