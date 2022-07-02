@@ -1,11 +1,21 @@
-import { setData } from 'src/shared/api';
+import { getAllData, setData } from 'src/shared/api';
 
-import type { SetPetDataRequest, SetPetDataRequestPayload } from './types';
+import type {
+  GetPetsResponse,
+  SetPetDataRequest,
+  SetPetDataRequestPayload,
+} from './types';
 
 export const setPetData = ({ id, payload }: SetPetDataRequest) => {
   return setData<SetPetDataRequestPayload>({
     collection: 'pets',
     path: id,
     payload,
+  });
+};
+
+export const getPets = () => {
+  return getAllData<GetPetsResponse>({
+    collection: 'pets',
   });
 };

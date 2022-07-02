@@ -1,6 +1,14 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
-import { setPetData } from './pets-requests';
+import { getPets, setPetData } from './pets-requests';
+
+export enum PetsQueryKeys {
+  getPets = 'getPets',
+}
+
+export const usePets = () => {
+  return useQuery(PetsQueryKeys.getPets, getPets);
+};
 
 export const useSetPetData = () => {
   return useMutation(setPetData);

@@ -3,6 +3,7 @@ import {
   collection as FBCollection,
   doc,
   getDoc,
+  getDocs,
   setDoc,
 } from 'firebase/firestore';
 import { db } from 'src/shared/config/firebase';
@@ -30,14 +31,19 @@ export const setData = async <T>({
     await setDoc(docRef, payload);
   } else {
     const docRef = FBCollection(db, collection);
+
     await addDoc(docRef, payload);
   }
 };
 
-export const getData = async ({ collection, path }: DataProps) => {
-  const docRef = doc(db, collection, ...getPathArray(path));
+export const getAllData = async <T>({ collection, path }: DataProps) => {
+  const collectionRef = FBCollection(db, collection, ...getPathArray(path));
+  const querySnapshot = await getDocs(collectionRef);
 
-  const docSnap = await getDoc(docRef);
+  const result: T[] = [];
+  querySnapshot.forEach((a) => {
+    result.push(a.data() as T);
+  });
 
-  return docSnap.data();
+  return result;
 };
