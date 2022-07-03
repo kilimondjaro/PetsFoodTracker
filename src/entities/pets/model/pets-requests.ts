@@ -26,7 +26,7 @@ export const getPets = () => {
     throw new Error('User is not authenticated');
   }
 
-  return getAllData<Pet[]>({
+  return getAllData<Pet>({
     collection: 'pets',
     queries: [where('owners', 'array-contains', uid)],
   });

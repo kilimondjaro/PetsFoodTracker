@@ -1,6 +1,5 @@
 {
   "foodTrackerScreen": {
-    "sampleTitle": "Это тестовый заголовок"
   },
   "authButton": {
     "login": "Войти",

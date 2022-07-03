@@ -10,6 +10,7 @@ const palette = {
   lightGrey: 'hsla(0, 0%, 92%, 1)',
   pinkyWhite: 'hsla(12, 83%, 98%, 0.97)',
   transparentWhite: 'hsla(0, 0%, 100%, 0.8)',
+  white: 'hsla(0, 0%, 100%, 1)',
 };
 
 export const lightTheme = createTheme({
@@ -27,10 +28,14 @@ export const lightTheme = createTheme({
     textInputBackground: palette.lightGrey,
     divider: palette.lightGrey,
     dragger: palette.lightGrey,
+
+    white: palette.white,
   },
   borderRadii: {
     xs: 2,
     s: 6,
+    m: 16,
+    ml: 20,
     l: 30,
   },
   spacing: {
