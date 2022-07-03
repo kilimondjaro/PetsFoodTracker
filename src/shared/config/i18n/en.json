@@ -15,5 +15,8 @@
   },
   "settingsInputModal": {
     "save": "Save"
+  },
+  "settingsScreen": {
+    "petsTitle": "Pets"
   }
 }

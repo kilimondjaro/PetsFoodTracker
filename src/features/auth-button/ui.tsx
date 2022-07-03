@@ -2,10 +2,10 @@ import * as Google from 'expo-auth-session/providers/google';
 import Constants from 'expo-constants';
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
+import { auth } from 'src/shared/config/firebase';
 import { t } from 'src/shared/lib/translate';
 import { Button } from 'src/shared/ui/button';
 
-import { auth } from '../../shared/config/firebase';
 import { signInToFirebase } from './lib/firebaseSignIn';
 
 WebBrowser.maybeCompleteAuthSession();

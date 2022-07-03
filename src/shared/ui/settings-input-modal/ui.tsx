@@ -35,6 +35,7 @@ export const SettingsInputModal = <T extends SettingsInputType>({
               {title}
             </Text>
             <TextInput
+              autoFocus
               placeholder={`Input ${title.toLowerCase()}`}
               value={value ? value.toString() : ''}
               keyboardType={keyboardType}

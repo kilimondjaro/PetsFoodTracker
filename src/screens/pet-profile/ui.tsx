@@ -1,7 +1,8 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
+import { useQueryClient } from 'react-query';
 import type { NavigationRoute } from 'src/app/navigation';
-import { useSetPetData } from 'src/entities/pets/model';
+import { PetsQueryKeys, useSetPetData } from 'src/entities/pets/model';
 import { t } from 'src/shared/lib/translate';
 import { Box } from 'src/shared/ui/box';
 import { Button } from 'src/shared/ui/button';
@@ -17,16 +18,21 @@ import { Text } from 'src/shared/ui/text';
 
 export const PetProfileScreen = ({
   navigation,
-}: NativeStackScreenProps<NavigationRoute>) => {
-  const [petName, setPetName] = React.useState<string | null>(null);
+  route,
+}: NativeStackScreenProps<NavigationRoute, 'PetProfile'>) => {
+  const pet = route.params;
+  const [petName, setPetName] = React.useState<string | null>(
+    pet?.name || null
+  );
   const [dailyFoodAmount, setDailyFoodAmount] = React.useState<number | null>(
-    null
+    pet?.dailyFoodAmount || null
   );
   const [foodPortionsPerDay, setFoodPortionsPerDay] = React.useState<
     number | null
-  >(null);
+  >(pet?.foodPortionsPerDay || null);
 
   const setPetData = useSetPetData();
+  const queryClient = useQueryClient();
 
   const savePetProfile = () => {
     if (!petName || !dailyFoodAmount || !foodPortionsPerDay) {
@@ -35,10 +41,17 @@ export const PetProfileScreen = ({
 
     setPetData.mutate(
       {
-        payload: { name: petName, dailyFoodAmount, foodPortionsPerDay },
+        id: pet?.id,
+        payload: {
+          name: petName,
+          dailyFoodAmount,
+          foodPortionsPerDay,
+          owners: pet?.owners || [],
+        },
       },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
+          await queryClient.invalidateQueries(PetsQueryKeys.getPets);
           navigation.navigate('FoodTracker');
         },
       }
@@ -47,29 +60,40 @@ export const PetProfileScreen = ({
 
   return (
     <ModalLayout>
-      <Box flex={1} paddingVertical="l" flexDirection="column">
-        <Text marginBottom="l" variant="title1" color="primaryGradient1">
-          {t('petProfileScreen.title')}
-        </Text>
-        <PetProfileSettingsRow
-          title={t('petProfileScreen.name')}
-          value={petName}
-          onSave={setPetName}
-        />
-        <PetProfileSettingsRow
-          title={t('petProfileScreen.dailyAmount')}
-          value={dailyFoodAmount}
-          keyboardType="number-pad"
-          onSave={setDailyFoodAmount}
-        />
-        <PetProfileSettingsRow
-          title={t('petProfileScreen.timesPerDay')}
-          value={foodPortionsPerDay}
-          keyboardType="number-pad"
-          onSave={setFoodPortionsPerDay}
-        />
+      <Box
+        flex={1}
+        paddingVertical="l"
+        flexDirection="column"
+        justifyContent="space-between"
+      >
         <Box>
-          <Button title={t('petProfileScreen.save')} onPress={savePetProfile} />
+          <Text marginBottom="l" variant="title1" color="primaryGradient1">
+            {t('petProfileScreen.title')}
+          </Text>
+          <PetProfileSettingsRow
+            title={t('petProfileScreen.name')}
+            value={petName}
+            onSave={setPetName}
+          />
+          <PetProfileSettingsRow
+            title={t('petProfileScreen.dailyAmount')}
+            value={dailyFoodAmount}
+            keyboardType="number-pad"
+            onSave={setDailyFoodAmount}
+          />
+          <PetProfileSettingsRow
+            title={t('petProfileScreen.timesPerDay')}
+            value={foodPortionsPerDay}
+            keyboardType="number-pad"
+            onSave={setFoodPortionsPerDay}
+          />
+        </Box>
+        <Box>
+          <Button
+            title={t('petProfileScreen.save')}
+            isLoading={setPetData.isLoading}
+            onPress={savePetProfile}
+          />
         </Box>
       </Box>
     </ModalLayout>

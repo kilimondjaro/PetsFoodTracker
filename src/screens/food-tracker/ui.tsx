@@ -29,7 +29,7 @@ export const FoodTrackerScreen = ({
         <Button
           title="Create Pet"
           onPress={() => {
-            navigation.navigate('PetProfile');
+            navigation.navigate('Settings');
           }}
         />
       </Box>

@@ -6,6 +6,7 @@ import { useCurrentUser } from 'src/processes/lib/auth';
 import { FoodTrackerScreen } from 'src/screens/food-tracker';
 import { SignInScreen } from 'src/screens/login';
 import { PetProfileScreen } from 'src/screens/pet-profile';
+import { SettingsScreen } from 'src/screens/settings';
 import type { Theme } from 'src/shared/ui/theme/types';
 
 const Stack = createNativeStackNavigator();
@@ -42,6 +43,7 @@ export function Navigation() {
           <>
             <Stack.Screen name="FoodTracker" component={FoodTrackerScreen} />
             <Stack.Screen name="PetProfile" component={PetProfileScreen} />
+            <Stack.Screen name="Settings" component={SettingsScreen} />
           </>
         ) : (
           <Stack.Screen name="Login" component={SignInScreen} />
