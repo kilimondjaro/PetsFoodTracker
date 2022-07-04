@@ -47,6 +47,10 @@ export const PetProfileScreen = ({
           dailyFoodAmount,
           foodPortionsPerDay,
           owners: pet?.owners || [],
+          currentDailyFoodAmountLeft:
+            pet?.currentDailyFoodAmountLeft || dailyFoodAmount,
+          currentDailyFoodPortionsGiven:
+            pet?.currentDailyFoodPortionsGiven || foodPortionsPerDay,
         },
       },
       {

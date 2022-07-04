@@ -21,5 +21,8 @@
   },
   "selectedPetInfo": {
     "perDay": "%{amount} per day"
+  },
+  "dailyAmount": {
+    "ofTimes": "%{current} of %{total} times"
   }
 }

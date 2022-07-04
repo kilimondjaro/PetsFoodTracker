@@ -2,6 +2,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import type { NavigationRoute } from 'src/app/navigation';
 import { usePets } from 'src/entities/pets/model';
+import { DailyAmount } from 'src/entities/pets/ui/daily-amount';
 import { SelectedPetInfo } from 'src/entities/pets/ui/selected-pet-info';
 import { PetsSelector } from 'src/features/pet-selector';
 import VerticalDots from 'src/shared/assets/icons/verticalDots.svg';
@@ -51,16 +52,19 @@ export const FoodTrackerScreen = ({
           </Box>
         )}
       </Box>
-      {pets.data?.length === 0 && (
-        <Box flex={1} justifyContent="center" alignItems="center">
-          <Button
-            title="Create Pet"
-            onPress={() => {
-              navigation.navigate('PetProfile');
-            }}
-          />
-        </Box>
-      )}
+      <Box flex={1} justifyContent="center">
+        {!!pets.data && <DailyAmount pet={pets.data[selectedPetIndex]} />}
+        {pets.data?.length === 0 && (
+          <Box flex={1} justifyContent="center" alignItems="center">
+            <Button
+              title="Create Pet"
+              onPress={() => {
+                navigation.navigate('PetProfile');
+              }}
+            />
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 };

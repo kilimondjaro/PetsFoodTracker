@@ -1,9 +1,13 @@
 export type Pet = {
   id: string;
   name: string;
+  owners: string[];
+
   dailyFoodAmount: number;
   foodPortionsPerDay: number;
-  owners: string[];
+
+  currentDailyFoodAmountLeft: number;
+  currentDailyFoodPortionsGiven: number;
 };
 
 export type SetPetDataRequest = {

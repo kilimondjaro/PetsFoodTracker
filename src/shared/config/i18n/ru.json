@@ -20,5 +20,8 @@
   },
   "selectedPetInfo": {
     "perDay": "%{amount} в день"
+  },
+  "dailyAmount": {
+    "ofTimes": "%{current} из %{total} раз"
   }
 }
