@@ -12,7 +12,7 @@ export const DailyAmount = ({ pet }: DailyAmountProps) => {
   } = pet;
 
   return (
-    <Box>
+    <Box alignItems="center">
       <Text variant="number1" color="textPrimary">
         {currentDailyFoodAmountLeft}
       </Text>

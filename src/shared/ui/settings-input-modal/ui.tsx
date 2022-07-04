@@ -32,7 +32,7 @@ export const SettingsInputModal = <T extends SettingsInputType>({
       <Pressable style={styles.pressable} onPress={() => Keyboard.dismiss()}>
         <Box flex={1} paddingVertical="xl" justifyContent="space-between">
           <Box>
-            <Text marginBottom="m" variant="title1">
+            <Text marginBottom="m" variant="title1" color="primaryGradient1">
               {title}
             </Text>
             <TextInput
