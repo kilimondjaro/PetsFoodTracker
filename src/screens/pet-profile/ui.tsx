@@ -50,7 +50,7 @@ export const PetProfileScreen = ({
           currentDailyFoodAmountLeft:
             pet?.currentDailyFoodAmountLeft || dailyFoodAmount,
           currentDailyFoodPortionsGiven:
-            pet?.currentDailyFoodPortionsGiven || foodPortionsPerDay,
+            pet?.currentDailyFoodPortionsGiven || 0,
         },
       },
       {
@@ -81,12 +81,14 @@ export const PetProfileScreen = ({
           />
           <PetProfileSettingsRow
             title={t('petProfileScreen.dailyAmount')}
+            inputType="number"
             value={dailyFoodAmount}
             keyboardType="number-pad"
             onSave={setDailyFoodAmount}
           />
           <PetProfileSettingsRow
             title={t('petProfileScreen.timesPerDay')}
+            inputType="number"
             value={foodPortionsPerDay}
             keyboardType="number-pad"
             onSave={setFoodPortionsPerDay}
@@ -106,10 +108,14 @@ export const PetProfileScreen = ({
 
 type PetProfileSettingsRowProps<T extends SettingsInputType> = {
   value: T;
-} & Pick<SettingsInputModalProps<T>, 'title' | 'keyboardType' | 'onSave'>;
+} & Pick<
+  SettingsInputModalProps<T>,
+  'title' | 'keyboardType' | 'onSave' | 'inputType'
+>;
 
 const PetProfileSettingsRow = <T extends SettingsInputType>({
   title,
+  inputType = 'string',
   value,
   keyboardType,
   onSave,
@@ -121,6 +127,7 @@ const PetProfileSettingsRow = <T extends SettingsInputType>({
     renderModalContent={({ closeModal }) => (
       <SettingsInputModal
         initialValue={value}
+        inputType={inputType}
         title={title}
         keyboardType={keyboardType}
         closeModal={closeModal}

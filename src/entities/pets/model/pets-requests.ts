@@ -15,7 +15,7 @@ export const setPetData = ({ id, payload }: SetPetDataRequest) => {
   return setData<typeof payload>({
     collection: 'pets',
     docPath: id,
-    payload: { ...payload, owners: uniq([...payload.owners, uid]) },
+    payload: { ...payload, owners: uniq([...(payload.owners || []), uid]) },
   });
 };
 

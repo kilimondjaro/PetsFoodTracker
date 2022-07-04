@@ -11,6 +11,6 @@ export type Pet = {
 };
 
 export type SetPetDataRequest = {
-  id?: string; // New pet is created if there is no id
-  payload: Omit<Pet, 'id'>;
+  id?: string;
+  payload: Partial<Omit<Pet, 'id'>>;
 };

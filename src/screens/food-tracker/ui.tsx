@@ -5,6 +5,7 @@ import { usePets } from 'src/entities/pets/model';
 import { DailyAmount } from 'src/entities/pets/ui/daily-amount';
 import { SelectedPetInfo } from 'src/entities/pets/ui/selected-pet-info';
 import { PetsSelector } from 'src/features/pet-selector';
+import { PortionSubtractor } from 'src/features/portion-subtractor';
 import VerticalDots from 'src/shared/assets/icons/verticalDots.svg';
 import { Box } from 'src/shared/ui/box';
 import { Button } from 'src/shared/ui/button';
@@ -27,7 +28,10 @@ export const FoodTrackerScreen = ({
     >
       <Box>
         <Box
-          backgroundColor="buttonBackground"
+          backgroundColor="transparentBackground"
+          shadowOpacity={0.15}
+          shadowRadius={8}
+          shadowOffset={{ width: 0, height: 0 }}
           borderRadius="m"
           height={60}
           flexDirection="row"
@@ -52,8 +56,17 @@ export const FoodTrackerScreen = ({
           </Box>
         )}
       </Box>
-      <Box flex={1} justifyContent="center">
-        {!!pets.data && <DailyAmount pet={pets.data[selectedPetIndex]} />}
+      <Box flex={1} justifyContent="center" width="100%">
+        {!!pets.data && (
+          <Box>
+            <Box alignItems="center">
+              <DailyAmount pet={pets.data[selectedPetIndex]} />
+            </Box>
+            <Box marginTop="xl">
+              <PortionSubtractor pet={pets.data[selectedPetIndex]} />
+            </Box>
+          </Box>
+        )}
         {pets.data?.length === 0 && (
           <Box flex={1} justifyContent="center" alignItems="center">
             <Button

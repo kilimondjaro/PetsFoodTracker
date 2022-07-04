@@ -37,7 +37,7 @@ export const setData = async <T>({
 
   const docRef = docPath ? doc(collectionRef, docPath) : doc(collectionRef);
 
-  await setDoc(docRef, payload);
+  await setDoc(docRef, payload, { merge: true });
 };
 
 export const setMultipleData = async <T>(requests: SetDataProps<T>[]) => {
@@ -49,7 +49,7 @@ export const setMultipleData = async <T>(requests: SetDataProps<T>[]) => {
     const collectionRef = FBCollection(db, collection, ...pathArray);
     const docRef = docPath ? doc(collectionRef, docPath) : doc(collectionRef);
 
-    batch.set(docRef, payload);
+    batch.set(docRef, payload, { merge: true });
   });
 
   await batch.commit();

@@ -19,7 +19,7 @@
     "petsTitle": "Питомцы"
   },
   "selectedPetInfo": {
-    "perDay": "%{amount} в день"
+    "perPortion": "%{amount} – 1 порция"
   },
   "dailyAmount": {
     "ofTimes": "%{current} из %{total} раз"

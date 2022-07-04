@@ -20,7 +20,7 @@
     "petsTitle": "Pets"
   },
   "selectedPetInfo": {
-    "perDay": "%{amount} per day"
+    "perPortion": "%{amount} per portion"
   },
   "dailyAmount": {
     "ofTimes": "%{current} of %{total} times"

@@ -16,7 +16,7 @@ export const SelectedPetInfo = ({ pet }: SelectedPetInfoProps) => {
         {pet.name}
       </Text>
       <Text color="textSecondary">
-        {t('selectedPetInfo.perDay', { amount: onePotionAmount })}
+        {t('selectedPetInfo.perPortion', { amount: onePotionAmount })}
       </Text>
     </Box>
   );

@@ -16,6 +16,7 @@ import type { SettingsInputModalProps, SettingsInputType } from './types';
 export const SettingsInputModal = <T extends SettingsInputType>({
   initialValue,
   title,
+  inputType = 'string',
   keyboardType,
   closeModal,
   onSave,
@@ -36,6 +37,7 @@ export const SettingsInputModal = <T extends SettingsInputType>({
             </Text>
             <TextInput
               autoFocus
+              type={inputType}
               placeholder={`Input ${title.toLowerCase()}`}
               value={value ? value.toString() : ''}
               keyboardType={keyboardType}
