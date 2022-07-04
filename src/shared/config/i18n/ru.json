@@ -17,5 +17,8 @@
   },
   "settingsScreen": {
     "petsTitle": "Питомцы"
+  },
+  "selectedPetInfo": {
+    "perDay": "%{amount} в день"
   }
 }

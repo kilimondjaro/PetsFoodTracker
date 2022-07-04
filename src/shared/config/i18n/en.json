@@ -18,5 +18,8 @@
   },
   "settingsScreen": {
     "petsTitle": "Pets"
+  },
+  "selectedPetInfo": {
+    "perDay": "%{amount} per day"
   }
 }
