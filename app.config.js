@@ -2,11 +2,11 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: 'PetsFoodTracker',
+    name: 'Pets Food Tracker',
     slug: 'PetsFoodTracker',
     version: '1.0.0',
     orientation: 'portrait',
-    icon: './assets/icon.png',
+    icon: './src/shared/assets/icons/appIcon.png',
     userInterfaceStyle: 'light',
     splash: {
       image: './assets/splash.png',
@@ -19,6 +19,7 @@ export default {
     assetBundlePatterns: ['**/*'],
     ios: {
       supportsTablet: true,
+      bundleIdentifier: 'com.kilimondjaro.petsfoodtracker',
     },
     android: {
       adaptiveIcon: {
