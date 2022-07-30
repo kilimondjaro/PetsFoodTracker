@@ -9,6 +9,9 @@
     "simple-import-sort",
     "jsx-expressions"
   ],
+  "ignorePatterns": [
+    "functions/lib/**/*"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json",
     "sourceType": "module"
