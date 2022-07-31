@@ -1,6 +1,6 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
-import { useQueryClient } from 'react-query';
 import type { NavigationRoute } from 'src/app/navigation';
 import {
   PetsQueryKeys,
@@ -46,7 +46,7 @@ export const PetProfileScreen = ({
     }
 
     const onSuccess = async () => {
-      await queryClient.invalidateQueries(PetsQueryKeys.getPets);
+      await queryClient.invalidateQueries([PetsQueryKeys.getPets]);
       navigation.navigate('FoodTracker');
     };
 

@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { createPet, getPets, updatePet } from './pets-requests';
 
@@ -7,7 +7,7 @@ export enum PetsQueryKeys {
 }
 
 export const usePets = () => {
-  return useQuery(PetsQueryKeys.getPets, getPets);
+  return useQuery([PetsQueryKeys.getPets], getPets);
 };
 
 export const useUpdatePet = () => {

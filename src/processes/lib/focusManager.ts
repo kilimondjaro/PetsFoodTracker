@@ -1,5 +1,5 @@
+import { focusManager } from '@tanstack/react-query';
 import { AppState } from 'react-native';
-import { focusManager } from 'react-query';
 
 export const enableFocusManger = () => {
   focusManager.setEventListener((handleFocus) => {

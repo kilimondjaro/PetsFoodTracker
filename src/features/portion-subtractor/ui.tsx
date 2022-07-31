@@ -1,6 +1,6 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { ImpactFeedbackStyle } from 'expo-haptics';
 import React from 'react';
-import { useQueryClient } from 'react-query';
 import type { Pet } from 'src/entities/pets/model';
 import { PetsQueryKeys, useUpdatePet } from 'src/entities/pets/model';
 import { Box } from 'src/shared/ui/box';
@@ -27,11 +27,11 @@ export const PortionSubtractor = ({ pet }: PortionSubtractorProps) => {
       },
       {
         onSuccess: async () => {
-          await queryClient.invalidateQueries(PetsQueryKeys.getPets);
+          await queryClient.invalidateQueries([PetsQueryKeys.getPets]);
         },
       }
     );
-    queryClient.setQueryData<Pet[]>(PetsQueryKeys.getPets, (old) => {
+    queryClient.setQueryData<Pet[]>([PetsQueryKeys.getPets], (old) => {
       return old
         ? old.map((curPet) => {
             if (curPet.id === pet.id) {

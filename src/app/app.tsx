@@ -2,9 +2,9 @@ import 'src/shared/config/i18n';
 import 'src/shared/config/firebase';
 
 import { ThemeProvider } from '@shopify/restyle';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { StorybookToggle } from 'src/features/storybook-toggle/ui';
 import { enableFocusManger } from 'src/processes/lib/focusManager';
 import StorybookUIRoot from 'src/shared/storybook/Storybook';
