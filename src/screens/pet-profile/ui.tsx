@@ -2,7 +2,11 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { useQueryClient } from 'react-query';
 import type { NavigationRoute } from 'src/app/navigation';
-import { PetsQueryKeys, useSetPetData } from 'src/entities/pets/model';
+import {
+  PetsQueryKeys,
+  useCreatePet,
+  useUpdatePet,
+} from 'src/entities/pets/model';
 import { t } from 'src/shared/lib/translate';
 import { Box } from 'src/shared/ui/box';
 import { Button } from 'src/shared/ui/button';
@@ -31,7 +35,9 @@ export const PetProfileScreen = ({
     number | null
   >(pet?.foodPortionsPerDay || null);
 
-  const setPetData = useSetPetData();
+  const updatePet = useUpdatePet();
+  const createPet = useCreatePet();
+
   const queryClient = useQueryClient();
 
   const savePetProfile = () => {
@@ -39,25 +45,38 @@ export const PetProfileScreen = ({
       return;
     }
 
-    setPetData.mutate(
-      {
-        id: pet?.id,
-        payload: {
-          name: petName,
-          dailyFoodAmount,
-          foodPortionsPerDay,
-          owners: pet?.owners || [],
-          currentDailyFoodAmountLeft:
-            pet?.currentDailyFoodAmountLeft || dailyFoodAmount,
-          currentDailyFoodPortionsGiven:
-            pet?.currentDailyFoodPortionsGiven || 0,
+    const onSuccess = async () => {
+      await queryClient.invalidateQueries(PetsQueryKeys.getPets);
+      navigation.navigate('FoodTracker');
+    };
+
+    // Update existing pet
+    if (pet) {
+      updatePet.mutate(
+        {
+          id: pet.id,
+          payload: {
+            name: petName,
+            dailyFoodAmount,
+            foodPortionsPerDay,
+          },
         },
+        {
+          onSuccess,
+        }
+      );
+      return;
+    }
+
+    // Create new pet
+    createPet.mutate(
+      {
+        name: petName,
+        dailyFoodAmount,
+        foodPortionsPerDay,
       },
       {
-        onSuccess: async () => {
-          await queryClient.invalidateQueries(PetsQueryKeys.getPets);
-          navigation.navigate('FoodTracker');
-        },
+        onSuccess,
       }
     );
   };
@@ -97,7 +116,7 @@ export const PetProfileScreen = ({
         <Box>
           <Button
             title={t('petProfileScreen.save')}
-            isLoading={setPetData.isLoading}
+            isLoading={updatePet.isLoading}
             onPress={savePetProfile}
           />
         </Box>

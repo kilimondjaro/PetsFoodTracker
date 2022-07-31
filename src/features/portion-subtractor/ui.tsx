@@ -2,7 +2,7 @@ import { ImpactFeedbackStyle } from 'expo-haptics';
 import React from 'react';
 import { useQueryClient } from 'react-query';
 import type { Pet } from 'src/entities/pets/model';
-import { PetsQueryKeys, useSetPetData } from 'src/entities/pets/model';
+import { PetsQueryKeys, useUpdatePet } from 'src/entities/pets/model';
 import { Box } from 'src/shared/ui/box';
 import { ModalWrapper } from 'src/shared/ui/modal-wrapper';
 import { SettingsInputModal } from 'src/shared/ui/settings-input-modal';
@@ -13,7 +13,7 @@ import type { PortionSubtractorProps } from './types';
 
 export const PortionSubtractor = ({ pet }: PortionSubtractorProps) => {
   const portionTemplates = [10, 15, 20];
-  const setPetData = useSetPetData();
+  const setPetData = useUpdatePet();
   const queryClient = useQueryClient();
 
   const doSubtraction = (portion: number) => {

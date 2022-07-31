@@ -10,7 +10,12 @@ export type Pet = {
   currentDailyFoodPortionsGiven: number;
 };
 
-export type SetPetDataRequest = {
+export type CreatePetRequest = Pick<
+  Pet,
+  'name' | 'dailyFoodAmount' | 'foodPortionsPerDay'
+>;
+
+export type UpdatePetRequest = {
   id?: string;
-  payload: Partial<Omit<Pet, 'id'>>;
+  payload: Partial<Omit<Pet, 'id' | 'owners'>>;
 };

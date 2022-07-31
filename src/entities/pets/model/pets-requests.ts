@@ -1,11 +1,28 @@
 import { where } from 'firebase/firestore';
-import uniq from 'lodash/uniq';
 import { getUid } from 'src/entities/user/lib';
 import { getAllData, setData } from 'src/shared/api';
 
-import type { Pet, SetPetDataRequest } from './types';
+import type { CreatePetRequest, Pet, UpdatePetRequest } from './types';
 
-export const setPetData = ({ id, payload }: SetPetDataRequest) => {
+export const createPet = (payload: CreatePetRequest) => {
+  const uid = getUid();
+
+  if (!uid) {
+    throw new Error('User is not authenticated');
+  }
+
+  return setData<Omit<Pet, 'id'>>({
+    collection: 'pets',
+    payload: {
+      ...payload,
+      owners: [uid],
+      currentDailyFoodAmountLeft: payload.dailyFoodAmount,
+      currentDailyFoodPortionsGiven: 0,
+    },
+  });
+};
+
+export const updatePet = ({ id, payload }: UpdatePetRequest) => {
   const uid = getUid();
 
   if (!uid) {
@@ -15,7 +32,7 @@ export const setPetData = ({ id, payload }: SetPetDataRequest) => {
   return setData<typeof payload>({
     collection: 'pets',
     docPath: id,
-    payload: { ...payload, owners: uniq([...(payload.owners || []), uid]) },
+    payload,
   });
 };
 

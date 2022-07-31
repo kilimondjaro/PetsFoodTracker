@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from 'react-query';
 
-import { getPets, setPetData } from './pets-requests';
+import { createPet, getPets, updatePet } from './pets-requests';
 
 export enum PetsQueryKeys {
   getPets = 'getPets',
@@ -10,6 +10,10 @@ export const usePets = () => {
   return useQuery(PetsQueryKeys.getPets, getPets);
 };
 
-export const useSetPetData = () => {
-  return useMutation(setPetData);
+export const useUpdatePet = () => {
+  return useMutation(updatePet);
+};
+
+export const useCreatePet = () => {
+  return useMutation(createPet);
 };
