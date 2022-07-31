@@ -41,7 +41,7 @@ export const PetsSelector = ({
               color={index === selectedPetIndex ? 'white' : 'textPrimary'}
               variant="title2"
             >
-              {pet.name[0].toUpperCase()}
+              {pet.name[0]?.toUpperCase() || ''}
             </Text>
           </Box>
         </Touchable>

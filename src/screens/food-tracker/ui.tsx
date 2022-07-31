@@ -17,6 +17,8 @@ export const FoodTrackerScreen = ({
   const pets = usePets();
   const [selectedPetIndex, setSelectedPetIndex] = React.useState(0);
 
+  const selectedPet = pets.data?.[selectedPetIndex];
+
   return (
     <Box
       flex={1}
@@ -50,20 +52,20 @@ export const FoodTrackerScreen = ({
             <VerticalDots />
           </Touchable>
         </Box>
-        {!!pets.data && (
+        {!!selectedPet && (
           <Box marginTop="xl">
-            <SelectedPetInfo pet={pets.data[selectedPetIndex]} />
+            <SelectedPetInfo pet={selectedPet} />
           </Box>
         )}
       </Box>
       <Box flex={1} justifyContent="center" width="100%">
-        {!!pets.data && (
+        {!!selectedPet && (
           <Box>
             <Box alignItems="center">
-              <DailyAmount pet={pets.data[selectedPetIndex]} />
+              <DailyAmount pet={selectedPet} />
             </Box>
             <Box marginTop="xl">
-              <PortionSubtractor pet={pets.data[selectedPetIndex]} />
+              <PortionSubtractor pet={selectedPet} />
             </Box>
           </Box>
         )}

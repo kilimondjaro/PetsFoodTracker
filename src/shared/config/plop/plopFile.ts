@@ -3,7 +3,7 @@ import type { NodePlopAPI } from 'plop';
 module.exports = function (plop: NodePlopAPI) {
   plop.setHelper(
     'lowerFirstLetter',
-    (txt: string) => txt[0].toLocaleLowerCase() + txt.substring(1)
+    (txt: string) => (txt[0]?.toLocaleLowerCase() || '') + txt.substring(1)
   );
   plop.setHelper('literal', (txt: string) => txt);
 
