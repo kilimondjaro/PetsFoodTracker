@@ -6,6 +6,7 @@ import { useFonts } from 'expo-font';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { StorybookToggle } from 'src/features/storybook-toggle/ui';
+import { enableFocusManger } from 'src/processes/lib/focusManager';
 import StorybookUIRoot from 'src/shared/storybook/Storybook';
 import { Box } from 'src/shared/ui/box';
 import { lightTheme } from 'src/shared/ui/theme';
@@ -24,6 +25,8 @@ export function App() {
   }
 
   const queryClient = new QueryClient();
+
+  enableFocusManger();
 
   return (
     <QueryClientProvider client={queryClient}>
