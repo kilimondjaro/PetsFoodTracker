@@ -1,5 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { ImpactFeedbackStyle } from 'expo-haptics';
+import produce from 'immer';
+import type { WritableDraft } from 'immer/dist/types/types-external';
 import React from 'react';
 import type { Pet } from 'src/entities/pets/model';
 import { PetsQueryKeys, useUpdatePet } from 'src/entities/pets/model';
@@ -32,16 +34,14 @@ export const PortionSubtractor = ({ pet }: PortionSubtractorProps) => {
       }
     );
     queryClient.setQueryData<Pet[]>([PetsQueryKeys.getPets], (old) => {
-      return old
-        ? old.map((curPet) => {
-            if (curPet.id === pet.id) {
-              curPet.currentDailyFoodAmountLeft -= portion;
-              curPet.currentDailyFoodPortionsGiven += 1;
-            }
-
-            return curPet;
-          })
-        : [];
+      return produce(old, (draftState) => {
+        (draftState || []).forEach((curPet) => {
+          if (curPet.id === pet.id) {
+            curPet.currentDailyFoodAmountLeft -= portion;
+            curPet.currentDailyFoodPortionsGiven += 1;
+          }
+        });
+      });
     });
   };
 

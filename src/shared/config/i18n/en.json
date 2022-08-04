@@ -1,7 +1,5 @@
 {
-  "foodTrackerScreen": {
-
-  },
+  "foodTrackerScreen": {},
   "authButton": {
     "signIn": "Sign in",
     "signOut": "Sign out"
