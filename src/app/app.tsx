@@ -12,6 +12,7 @@ import { Box } from 'src/shared/ui/box';
 import { lightTheme } from 'src/shared/ui/theme';
 
 import { Navigation } from './navigation';
+import { useNotifications } from './notifications/useNotifications';
 
 export function App() {
   const [isStorybookShown, setStorybookShownValue] = React.useState(false);
@@ -19,6 +20,8 @@ export function App() {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     DaysOne: require('src/shared/assets/fonts/DaysOne.ttf'),
   });
+
+  useNotifications();
 
   if (!areFontsLoaded) {
     return null;
