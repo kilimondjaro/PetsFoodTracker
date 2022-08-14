@@ -9,7 +9,7 @@ export default {
     icon: './src/shared/assets/icons/appIcon.png',
     userInterfaceStyle: 'light',
     splash: {
-      image: './assets/splash.png',
+      image: './src/shared/assets/icons/appIcon.png',
       resizeMode: 'contain',
       backgroundColor: '#ffffff',
     },
