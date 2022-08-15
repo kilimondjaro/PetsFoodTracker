@@ -1,4 +1,4 @@
-import type { Transforms2d } from '@shopify/react-native-skia';
+import type { SkPoint, Transforms2d } from '@shopify/react-native-skia';
 import {
   BackdropBlur,
   Canvas,
@@ -12,6 +12,7 @@ import {
   useComputedValue,
   useValue,
   useValueEffect,
+  vec,
 } from '@shopify/react-native-skia';
 import _ from 'lodash';
 import React, { useMemo } from 'react';
@@ -23,21 +24,16 @@ const interval = 2000;
 
 const getRandomInt = (max: number) => Math.floor(Math.random() * max);
 
-const getLinePath = (screenWidth: number, screenHeight: number) => {
-  const leftX = 0;
-  const leftY = getRandomInt(screenHeight);
-  const rightX = screenWidth;
-  const rightY = getRandomInt(screenHeight);
-
-  const k = (rightY - leftY) / (rightX - leftX);
-  const b = rightY - k * rightX;
+const getLinePath = (p1: SkPoint, p2: SkPoint) => {
+  const k = (p2.y - p1.y) / (p2.x - p1.x);
+  const b = p2.y - k * p2.x;
 
   const lineFn = (x: number) => k * x + b;
 
   const angle = Math.atan(k) + Math.PI / 2;
 
   const lineLength = Math.sqrt(
-    Math.pow(rightX - leftX, 2) + Math.pow(rightY - leftY, 2)
+    Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2)
   );
 
   const stepsCount = 7;
@@ -55,26 +51,38 @@ const getLinePath = (screenWidth: number, screenHeight: number) => {
 
 export const PawsBackground = ({}: PawsBackgroundProps) => {
   const clock = useClockValue();
-  const path = useMemo(
-    () =>
-      getLinePath(
+
+  const generateNewPath = () =>
+    getLinePath(
+      vec(0, getRandomInt(Dimensions.get('screen').height)),
+      vec(
         Dimensions.get('screen').width,
-        Dimensions.get('screen').height
-      ),
-    []
-  );
+        getRandomInt(Dimensions.get('screen').height)
+      )
+    );
+
+  const pathRef = React.useRef(generateNewPath());
+  const stepIndex = React.useRef(0);
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const pawTranslateValue = useComputedValue<Transforms2d>(() => {
-    const index = Math.floor(clock.current / interval) % path.path.length;
+    const index =
+      Math.floor(clock.current / interval) % pathRef.current.path.length;
+
+    if (index !== stepIndex.current) {
+      if (index === 0) {
+        generateNewPath();
+      }
+      stepIndex.current = index;
+    }
 
     return [
       ...translate({
-        x: path.path[index]?.x || 0,
-        y: path.path[index]?.y || 0,
+        x: pathRef.current.path[index]?.x || 0,
+        y: pathRef.current.path[index]?.y || 0,
       }),
-      { rotateZ: path.rotation },
+      { rotateZ: pathRef.current.rotation },
     ];
   }, [clock]);
 

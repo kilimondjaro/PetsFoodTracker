@@ -1,6 +1,5 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { View } from 'react-native';
 import type { NavigationRoute } from 'src/app/navigation';
 import { usePets } from 'src/entities/pets/model';
 import { DailyAmount } from 'src/entities/pets/ui/daily-amount';
@@ -10,9 +9,8 @@ import { PortionSubtractor } from 'src/features/portion-subtractor';
 import VerticalDots from 'src/shared/assets/icons/verticalDots.svg';
 import { Box } from 'src/shared/ui/box';
 import { Button } from 'src/shared/ui/button';
+import { PawsBackground } from 'src/shared/ui/paws-background';
 import { Touchable } from 'src/shared/ui/touchable';
-
-import { PawsBackground } from '../../shared/ui/paws-background';
 
 export const FoodTrackerScreen = ({
   navigation,
