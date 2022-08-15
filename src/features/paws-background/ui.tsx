@@ -96,18 +96,18 @@ export const PawsBackground = ({}: PawsBackgroundProps) => {
   useValueEffect(clock, () => {
     blur.current = interpolate(
       (clock.current % interval) / interval,
-      [0, 0.05, 0.25, 0.5, 0.5, 0.55, 1],
+      [0, 0.15, 0.2, 0.5, 0.5, 0.6, 1],
       [15, 2, 2, 2, 15, 2, 2]
     );
     opacity1.current = interpolate(
       (clock.current % interval) / interval,
-      [0, 0.1, 0.25, 0.5, 1],
+      [0, 0.15, 0.25, 0.5, 1],
       [0, 1, 1, 0, 0]
     );
 
     opacity2.current = interpolate(
       (clock.current % interval) / interval,
-      [0, 0.5, 0.55, 0.75, 1],
+      [0, 0.5, 0.65, 0.75, 1],
       [0, 0, 1, 1, 0]
     );
   });
