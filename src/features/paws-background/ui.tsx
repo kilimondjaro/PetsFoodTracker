@@ -1,4 +1,4 @@
-import type { SkPoint, Transforms2d } from '@shopify/react-native-skia';
+import type { Transforms2d } from '@shopify/react-native-skia';
 import {
   BackdropBlur,
   Canvas,
@@ -14,40 +14,13 @@ import {
   useValueEffect,
   vec,
 } from '@shopify/react-native-skia';
-import _ from 'lodash';
 import React from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 
 import type { PawsBackgroundProps } from './types';
+import { getLinePath, getRandomInt } from './utils/pathFunctions';
 
-const interval = 4000;
-
-const getRandomInt = (max: number) => Math.floor(Math.random() * max);
-
-const getLinePath = (p1: SkPoint, p2: SkPoint) => {
-  const k = (p2.y - p1.y) / (p2.x - p1.x);
-  const b = p2.y - k * p2.x;
-
-  const lineFn = (x: number) => k * x + b;
-
-  const angle = Math.atan(k) + Math.PI / 2;
-
-  const lineLength = Math.sqrt(
-    Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2)
-  );
-
-  const stepsCount = 7;
-  const xStep = Math.floor(lineLength / stepsCount);
-
-  const arr = _.times(stepsCount + 2, Number);
-
-  const path = arr.map((i) => ({ x: xStep * i, y: lineFn(xStep * i) }));
-
-  return {
-    path,
-    rotation: angle,
-  };
-};
+const interval = 2000;
 
 export const PawsBackground = ({}: PawsBackgroundProps) => {
   const clock = useClockValue();
@@ -64,11 +37,13 @@ export const PawsBackground = ({}: PawsBackgroundProps) => {
   const pathRef = React.useRef(generateNewPath());
   const stepIndex = React.useRef(0);
 
+  const getIndex = () =>
+    Math.floor(clock.current / interval) % pathRef.current.path.length;
+
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const paw1TranslateValue = useComputedValue<Transforms2d>(() => {
-    const index =
-      Math.floor(clock.current / interval) % pathRef.current.path.length;
+    const index = getIndex();
 
     if (index !== stepIndex.current) {
       if (index === 0) {
@@ -83,14 +58,20 @@ export const PawsBackground = ({}: PawsBackgroundProps) => {
         y: pathRef.current.path[index]?.y || 0,
       }),
       { rotateZ: pathRef.current.rotation },
+      {
+        scale: interpolate(
+          (clock.current % interval) / interval,
+          [0, 0.05, 0.25, 0.5],
+          [1.2, 1, 1, 1.2]
+        ),
+      },
     ];
   }, [clock]);
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const paw2TranslateValue = useComputedValue<Transforms2d>(() => {
-    const index =
-      Math.floor(clock.current / interval) % pathRef.current.path.length;
+    const index = getIndex();
 
     return [
       ...translate({
@@ -98,6 +79,13 @@ export const PawsBackground = ({}: PawsBackgroundProps) => {
         y: (pathRef.current.path[index]?.y || 0) + 100,
       }),
       { rotateZ: pathRef.current.rotation },
+      {
+        scale: interpolate(
+          (clock.current % interval) / interval,
+          [0.5, 0.55, 0.75, 1],
+          [1.2, 1, 1, 1.2]
+        ),
+      },
     ];
   }, [clock]);
 
@@ -113,34 +101,31 @@ export const PawsBackground = ({}: PawsBackgroundProps) => {
     );
     opacity1.current = interpolate(
       (clock.current % interval) / interval,
-      [0, 0.25, 0.5, 1],
-      [1, 1, 0, 0]
+      [0, 0.1, 0.25, 0.5, 1],
+      [0, 1, 1, 0, 0]
     );
 
     opacity2.current = interpolate(
       (clock.current % interval) / interval,
-      [0, 0.5, 0.5, 0.75, 1],
+      [0, 0.5, 0.55, 0.75, 1],
       [0, 0, 1, 1, 0]
     );
   });
+
+  const pathBoxInitialDimensions = { x: 0, y: 0, width: 500, height: 500 };
+  const pathBoxResultDimensions = { x: 0, y: 0, width: 70, height: 70 };
 
   return (
     <Canvas style={styles.canvas}>
       <Fill color="white" />
       <Group transform={paw1TranslateValue}>
-        <FitBox
-          src={{ x: 0, y: 0, width: 500, height: 500 }}
-          dst={{ x: 0, y: 0, width: 100, height: 100 }}
-        >
+        <FitBox src={pathBoxInitialDimensions} dst={pathBoxResultDimensions}>
           <Path opacity={opacity1} color="black" path={pawPath} />
         </FitBox>
       </Group>
 
       <Group transform={paw2TranslateValue}>
-        <FitBox
-          src={{ x: 0, y: 0, width: 500, height: 500 }}
-          dst={{ x: 0, y: 0, width: 100, height: 100 }}
-        >
+        <FitBox src={pathBoxInitialDimensions} dst={pathBoxResultDimensions}>
           <Path opacity={opacity2} color="black" path={pawPath} />
         </FitBox>
       </Group>

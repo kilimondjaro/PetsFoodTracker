@@ -4,12 +4,12 @@ import type { NavigationRoute } from 'src/app/navigation';
 import { usePets } from 'src/entities/pets/model';
 import { DailyAmount } from 'src/entities/pets/ui/daily-amount';
 import { SelectedPetInfo } from 'src/entities/pets/ui/selected-pet-info';
+import { PawsBackground } from 'src/features/paws-background';
 import { PetsSelector } from 'src/features/pet-selector';
 import { PortionSubtractor } from 'src/features/portion-subtractor';
 import VerticalDots from 'src/shared/assets/icons/verticalDots.svg';
 import { Box } from 'src/shared/ui/box';
 import { Button } from 'src/shared/ui/button';
-import { PawsBackground } from 'src/shared/ui/paws-background';
 import { Touchable } from 'src/shared/ui/touchable';
 
 export const FoodTrackerScreen = ({
