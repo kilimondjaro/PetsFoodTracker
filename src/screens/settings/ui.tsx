@@ -1,10 +1,12 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import type { NavigationRoute } from 'src/app/navigation';
 import { usePets } from 'src/entities/pets/model';
 import { SignOutButton } from 'src/features/auth-button';
 import Plus from 'src/shared/assets/icons/plus.svg';
 import { t } from 'src/shared/lib/translate';
+import { Background } from 'src/shared/ui/background';
 import { Box } from 'src/shared/ui/box';
 import { ModalLayout } from 'src/shared/ui/modal-layout';
 import { SettingsRow } from 'src/shared/ui/settings-row/ui';
@@ -18,6 +20,9 @@ export const SettingsScreen = ({
 
   return (
     <ModalLayout>
+      <Box position="absolute" style={StyleSheet.absoluteFill}>
+        <Background />
+      </Box>
       <Box
         flex={1}
         paddingVertical="l"
