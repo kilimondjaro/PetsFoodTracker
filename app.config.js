@@ -47,4 +47,11 @@ export default {
       googleClientId: process.env.GOOGLE_CLIENT_ID,
     },
   },
+  runtimeVersion: {
+    policy: 'sdkVersion',
+  },
+  updates: {
+    fallbackToCacheTimeout: 0,
+    url: process.env.EXPO_UPDATES_URL,
+  },
 };

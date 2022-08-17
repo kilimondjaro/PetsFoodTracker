@@ -47,6 +47,7 @@
     "expo-notifications": "~0.16.1",
     "expo-random": "~12.3.0",
     "expo-status-bar": "~1.4.0",
+    "expo-updates": "~0.14.4",
     "firebase": "^9.8.4",
     "i18n-js": "^3.9.2",
     "immer": "^9.0.15",
